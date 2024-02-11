@@ -13,14 +13,12 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Item = ({ title, icon, selected, setSelected }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const pathParts = location.pathname.split("/");
-  const state = pathParts[1];
+
   return (
     <MenuItem
       active={selected === title}
@@ -31,12 +29,13 @@ const Item = ({ title, icon, selected, setSelected }) => {
       icon={icon}
     >
       <Typography>{title}</Typography>
+      <Link to={to} />
     </MenuItem>
   );
 };
 
 const Sidebar = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -84,10 +83,13 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography 
-                 onClick={() => {
-                  navigate("/home");
-                }} variant="h2" color={colors.grey[100]}>
+                <Typography
+                  onClick={() => {
+                    navigate("/home");
+                  }}
+                  variant="h2"
+                  color={colors.grey[100]}
+                >
                   STATEUS
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -118,6 +120,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
+              to="/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -132,12 +135,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="City Information"
+              to="/home"
               icon={<LocationCityIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Tourist Places"
+              to="/home"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -152,6 +157,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="FAQ Page"
+              to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -166,25 +172,28 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Bar Chart"
-              to="/bar"
+              to="/home"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Pie Chart"
+              to="/home"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Line Chart"
+              to="/home"
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Geography Chart"
+              to="/geography"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

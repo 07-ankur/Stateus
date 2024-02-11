@@ -8,13 +8,18 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Home from "./scenes/Home/Home";
 import { useLocation } from "react-router-dom";
+import Geography from "./scenes/geography";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const location = useLocation();
 
-  const isHomeRoute = location.pathname === "/home";
+  const isHomeRoute =
+    location.pathname === "/home" ||
+    location.pathname === "/faq" ||
+    location.pathname === "/pie" ||
+    location.pathname === "/geography";
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -25,6 +30,7 @@ function App() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/Maharashtra" element={<Dashboard />} />
               <Route path="/Bihar" element={<Dashboard />} />
@@ -38,6 +44,7 @@ function App() {
               <Route path="/Kerela" element={<Dashboard />} />
               <Route path="/Punjab" element={<Dashboard />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/geography" element={<Geography />} />
             </Routes>
           </main>
         </div>
